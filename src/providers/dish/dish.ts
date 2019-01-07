@@ -6,6 +6,7 @@ import { baseURL } from '../../shared/baseurl';
 import {ProcessHttpmsgProvider} from '../process-httpmsg/process-httpmsg';
 import 'rxjs/add/operator/delay';
 import 'rxjs/add/operator/catch';
+import 'rxjs/add/operator/map';
 /*
   Generated class for the DishProvider provider.
 
@@ -19,19 +20,19 @@ export class DishProvider {
     console.log('Hello DishProvider Provider');
   }
 getDishes(): Observable<Dish[]>{
-  return this.http.get(baseURL + 'dishes')
+  return this.http.get(baseURL + '/dishes')
   .map(res => {return this.processHttpmsgService.extractData(res)})
   .catch(error => {return this.processHttpmsgService.handleError(error)});
    
 }
 getDish(id: number) : Observable<Dish> {
-  return this.http.get(baseURL + 'dishes/' + id)
+  return this.http.get(baseURL + '/dishes/' + id)
     .map(res => { return this.processHttpmsgService.extractData(res) })
     .catch(error => { return this.processHttpmsgService.handleError(error) });
 }
 getFeaturedDish(): Observable<Dish> {
-  return this.http.get(baseURL + 'dishes?featured=true')
-    .map(res => { return this.processHttpmsgService.extractData(res) [0]})
+  return this.http.get(baseURL + '/dishes?featured=true')
+    .map(res => { return this.processHttpmsgService.extractData(res)[0]})
     .catch(error => { return this.processHttpmsgService.handleError(error) });
 }
 }

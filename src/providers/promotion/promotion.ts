@@ -6,6 +6,7 @@ import { baseURL } from '../../shared/baseurl';
 import { ProcessHttpmsgProvider } from '../process-httpmsg/process-httpmsg';
 import 'rxjs/add/operator/delay';
 import 'rxjs/add/operator/catch';
+import 'rxjs/add/operator/map';
 /*
   Generated class for the PromotionProvider provider.
 
@@ -22,7 +23,7 @@ export class PromotionProvider {
   }
   getPromotions(): Observable<Promotion[]> {
     return this.http
-      .get(baseURL + 'promotions')
+      .get(baseURL + '/promotions')
       .map(res => {
         return this.processHttpmsgService.extractData(res);
       })
@@ -32,7 +33,7 @@ export class PromotionProvider {
   }
   getPromotion(id: number): Observable<Promotion> {
     return this.http
-      .get(baseURL + 'promotion/' + id)
+      .get(baseURL + 'promotions/' + id)
       .map(res => {
         return this.processHttpmsgService.extractData(res);
       })
@@ -42,7 +43,7 @@ export class PromotionProvider {
   }
   getFeaturedPromotion(): Observable<Promotion> {
     return this.http
-      .get(baseURL + 'promotions?featured=true')
+      .get(baseURL + '/promotions?featured=true')
       .map(res => {
         return this.processHttpmsgService.extractData(res)[0];
       })

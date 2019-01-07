@@ -11,25 +11,24 @@ import 'rxjs/add/observable/throw';
 */
 @Injectable()
 export class ProcessHttpmsgProvider {
-
   constructor(public http: HttpClient) {
-    console.log('Hello ProcessHttpmsgProvider Provider');
+    console.log("Hello ProcessHttpmsgProvider Provider");
   }
-  public extractData(res: Response) {
-    let body = res.json();
+  public extractData(res: any) {
+    let body = res;
     return body || {};
   }
   public handleError(error: Response | any) {
-    let errMsg:string;
+    let errMsg: string;
 
-    if(error instanceof Response) {
+    if (error instanceof Response) {
       const body = error.json();
       const err = body.catch || JSON.stringify(body);
-      errMsg = `${error.status} - ${error.statusText || ''} ${err}`;
-    }
-    else {
+      errMsg = `${error.status} - ${error.statusText || ""} ${err}`;
+    } else {
       errMsg = error.message ? error.message : error.toString();
     }
+    console.log(errMsg);
     return Observable.throw(errMsg);
   }
 }

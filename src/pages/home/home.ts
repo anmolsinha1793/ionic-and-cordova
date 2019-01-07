@@ -18,21 +18,24 @@ export class HomePage implements OnInit {
   dishErrMess:string;
   promoErrMess: string;
   leaderErrMess:string;
-  constructor(public navCtrl: NavController,private dishservice:DishProvider,private promotionservice: PromotionProvider,private leaderservice:LeaderProvider,@Inject('BaseURL') private BaseURL) {
+  constructor(public navCtrl: NavController, private dishProvider: DishProvider, private promotionProvider: PromotionProvider, private leaderProvider:LeaderProvider,@Inject('BaseURL') private BaseURL) {
 
   }
     ngOnInit(){
-      this.dishservice.getFeaturedDish()
-      .subscribe(dish => this.dish = dish,
-        errmess => this.dishErrMess = <any>errmess
-      );
-      this.promotionservice
+      this.BaseURL = this.BaseURL+'/';
+      this.dishProvider
+        .getFeaturedDish()
+        .subscribe(
+          dish => (this.dish = dish),
+          errmess => (this.dishErrMess = <any>errmess)
+        );
+      this.promotionProvider
         .getFeaturedPromotion()
         .subscribe(
           promotion => (this.promotion = promotion),
           errmess => (this.promoErrMess = <any>errmess)
         );
-      this.leaderservice
+      this.leaderProvider
         .getFeaturedLeader()
         .subscribe(
           leader => (this.leader = leader),
