@@ -23,7 +23,7 @@ export class PromotionProvider {
   }
   getPromotions(): Observable<Promotion[]> {
     return this.http
-      .get(baseURL + '/promotions')
+      .get(baseURL + 'promotions')
       .map(res => {
         return this.processHttpmsgService.extractData(res);
       })
@@ -43,7 +43,7 @@ export class PromotionProvider {
   }
   getFeaturedPromotion(): Observable<Promotion> {
     return this.http
-      .get(baseURL + '/promotions?featured=true')
+      .get(baseURL + 'promotions?featured=true')
       .map(res => {
         return this.processHttpmsgService.extractData(res)[0];
       })

@@ -7,6 +7,7 @@ import { HomePage } from '../pages/home/home';
 import { AboutPage } from '../pages/about/about';
 import { MenuPage } from '../pages/menu/menu';
 import { ContactPage } from '../pages/contact/contact';
+import {DishdetailPage} from '../pages/dishdetail/dishdetail';
 
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
@@ -17,10 +18,10 @@ import { ProcessHttpmsgProvider } from '../providers/process-httpmsg/process-htt
 import {baseURL} from '../shared/baseurl';
 
 @NgModule({
-  declarations: [MyApp, HomePage, AboutPage, MenuPage, ContactPage],
+  declarations: [MyApp, HomePage, AboutPage, MenuPage, ContactPage, DishdetailPage],
   imports: [BrowserModule,HttpClientModule,IonicModule.forRoot(MyApp)],
   bootstrap: [IonicApp],
-  entryComponents: [MyApp, HomePage, AboutPage, MenuPage, ContactPage],
+  entryComponents: [MyApp, HomePage, AboutPage, MenuPage, ContactPage, DishdetailPage],
   providers: [
     StatusBar,
     SplashScreen,

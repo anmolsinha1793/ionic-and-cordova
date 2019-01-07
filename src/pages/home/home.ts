@@ -22,7 +22,6 @@ export class HomePage implements OnInit {
 
   }
     ngOnInit(){
-      this.BaseURL = this.BaseURL+'/';
       this.dishProvider
         .getFeaturedDish()
         .subscribe(

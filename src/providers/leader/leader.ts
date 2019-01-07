@@ -23,7 +23,7 @@ export class LeaderProvider {
   }
   getLeaders(): Observable<Leader[]> {
     return this.http
-      .get(baseURL + '/leaders')
+      .get(baseURL + 'leaders')
       .map(res => {
         return this.processHttpmsgService.extractData(res);
       })
@@ -33,7 +33,7 @@ export class LeaderProvider {
   }
   getLeader(id: number): Observable<Leader> {
     return this.http
-      .get(baseURL + '/leaders/' + id)
+      .get(baseURL + 'leaders/' + id)
       .map(res => {
         return this.processHttpmsgService.extractData(res);
       })
@@ -43,7 +43,7 @@ export class LeaderProvider {
   }
   getFeaturedLeader(): Observable<Leader> {
     return this.http
-      .get(baseURL + '/leaders?featured=true')
+      .get(baseURL + 'leaders?featured=true')
       .map(res => {
         return this.processHttpmsgService.extractData(res)[0];
       })
