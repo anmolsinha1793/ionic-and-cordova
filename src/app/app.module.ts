@@ -1,7 +1,7 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { ErrorHandler, NgModule } from '@angular/core';
 import { IonicApp, IonicErrorHandler, IonicModule } from 'ionic-angular';
-
+import { HttpClient } from '@angular/common/http';
 import { MyApp } from './app.component';
 import { HomePage } from '../pages/home/home';
 import { AboutPage } from '../pages/about/about';
@@ -14,10 +14,10 @@ import { DishProvider } from '../providers/dish/dish';
 import { LeaderProvider } from '../providers/leader/leader';
 import { PromotionProvider } from '../providers/promotion/promotion';
 import { ProcessHttpmsgProvider } from '../providers/process-httpmsg/process-httpmsg';
-
+import {baseURL} from '..shared/baseURL';
 @NgModule({
   declarations: [MyApp, HomePage, AboutPage, MenuPage, ContactPage],
-  imports: [BrowserModule, IonicModule.forRoot(MyApp)],
+  imports: [BrowserModule, IonicModule.forRoot(MyApp),HttpClient],
   bootstrap: [IonicApp],
   entryComponents: [MyApp, HomePage, AboutPage, MenuPage, ContactPage],
   providers: [
@@ -27,7 +27,8 @@ import { ProcessHttpmsgProvider } from '../providers/process-httpmsg/process-htt
     DishProvider,
     LeaderProvider,
     PromotionProvider,
-    ProcessHttpmsgProvider
+    ProcessHttpmsgProvider,
+    { provide:'baseURL',useValue:baseURL}
   ]
 })
 export class AppModule {}
