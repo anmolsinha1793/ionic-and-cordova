@@ -3,6 +3,7 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import {Dish} from '../../shared/dish';
 import {DishProvider} from '../../providers/dish/dish';
 import {DishdetailPage} from '../dishdetail/dishdetail';
+import {FavoriteProvider} from '../../providers/favorite/favorite';
 /**
  * Generated class for the MenuPage page.
  *
@@ -12,27 +13,36 @@ import {DishdetailPage} from '../dishdetail/dishdetail';
 
 @IonicPage()
 @Component({
-  selector: 'page-menu',
-  templateUrl: 'menu.html',
+  selector: "page-menu",
+  templateUrl: "menu.html"
 })
-export class MenuPage implements OnInit{
+export class MenuPage implements OnInit {
+  dishes: Dish[];
+  errMess: string;
 
-  dishes:Dish[];
-  errMess:string;
-
-  constructor(public navCtrl: NavController, public navParams: NavParams, private dishProvider: DishProvider, @Inject('BaseURL') private BaseURL) {
-  }
-  ngOnInit(){
-    this.dishProvider.getDishes()
-    .subscribe(dishes => this.dishes = dishes,
-      errmess => this.errMess = errmess);
+  constructor(
+    public navCtrl: NavController,
+    public navParams: NavParams,
+    private dishProvider: DishProvider,private favoriteservice:FavoriteProvider,
+    @Inject("BaseURL") private BaseURL
+  ) {}
+  ngOnInit() {
+    this.dishProvider
+      .getDishes()
+      .subscribe(
+        dishes => (this.dishes = dishes),
+        errmess => (this.errMess = errmess)
+      );
   }
   ionViewDidLoad() {
-    console.log('ionViewDidLoad MenuPage');
+    console.log("ionViewDidLoad MenuPage");
   }
-  dishSelected(event,dish){
-    this.navCtrl.push(DishdetailPage,{
-      dish:dish
+  dishSelected(event, dish) {
+    this.navCtrl.push(DishdetailPage, {
+      dish: dish
     });
+  }
+  addToFavorites(dish: Dish) {
+    this.favoriteservice.addFavorite(dish.id);
   }
 }

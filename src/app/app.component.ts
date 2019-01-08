@@ -7,6 +7,7 @@ import { HomePage } from '../pages/home/home';
 import { AboutPage } from '../pages/about/about';
 import { MenuPage } from '../pages/menu/menu';
 import { ContactPage } from '../pages/contact/contact';
+import { FavoritesPage } from '../pages/favorites/favorites';
 
 @Component({
   templateUrl: 'app.html'
@@ -22,7 +23,7 @@ export class MyApp {
     this.initializeApp();
 
     // used for an example of ngFor and navigation
-    this.pages = [{ title: 'Home', icon: 'home', component: HomePage }, { title: 'About Us', icon: 'information-circle', component: AboutPage }, { title: 'Menu', icon: 'list-box', component: MenuPage }, { title: 'Contact Us', icon: 'contact', component: ContactPage }];
+    this.pages = [{ title: 'Home', icon: 'home', component: HomePage }, { title: 'About Us', icon: 'information-circle', component: AboutPage }, { title: 'Menu', icon: 'list-box', component: MenuPage }, { title: 'Contact Us', icon: 'contact', component: ContactPage },{title: 'Favorites', icon: 'heart', component: FavoritesPage }];
 
   }
 
