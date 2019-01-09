@@ -3,7 +3,7 @@ import { IonicPage, NavController, NavParams, ToastController, ActionSheetContro
 import {Dish} from '../../shared/dish';
 import {FavoriteProvider} from '../../providers/favorite/favorite';
 import {CommentPage} from '../../pages/comment/comment';
-
+import { SocialSharing } from '@ionic-native/social-sharing';
 /**
  * Generated class for the DishdetailPage page.
  *
@@ -30,7 +30,8 @@ export class DishdetailPage {
     private favoriteservice: FavoriteProvider,
     private toastCtrl: ToastController,
     public actionSheetCtrl: ActionSheetController,
-    public modalCtrl: ModalController
+    public modalCtrl: ModalController,
+    private socialSharing: SocialSharing
   ) {
     this.dish = navParams.get("dish");
     this.favorite = this.favoriteservice.isFavorite(this.dish.id);
@@ -69,6 +70,20 @@ export class DishdetailPage {
           handler: () => {
             this.openCommentPage();
           }
+        },
+        {
+          text:'Share via Facebook',
+          handler: () => {
+            this.socialSharing.shareViaFacebook(
+              this.dish.name + '--' + this.dish.description,
+              this.BaseURL + this.dish.image,''
+            ).then(() => console.log('Posted successfully to facebook'))
+              .catch(() => console.log('Failed to post to facebook'))
+            ;
+          }
+        },
+        {
+
         },
         {
           text: "Cancel",
