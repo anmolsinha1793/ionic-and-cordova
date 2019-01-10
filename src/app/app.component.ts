@@ -1,8 +1,10 @@
 import { Component, ViewChild } from '@angular/core';
-import { Nav, Platform,ModalController } from 'ionic-angular';
+import { Nav, Platform,ModalController, LoadingController } from 'ionic-angular';
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 
+
+import { Network } from '@ionic-native/network';
 import { HomePage } from '../pages/home/home';
 import { AboutPage } from '../pages/about/about';
 import { MenuPage } from '../pages/menu/menu';
@@ -18,10 +20,10 @@ export class MyApp {
   @ViewChild(Nav) nav: Nav;
 
   rootPage: any = HomePage;
-
+  loading:any = null;
   pages: Array<{title: string, icon:string, component: any}>;
 
-  constructor(public platform: Platform, public statusBar: StatusBar, public splashScreen: SplashScreen, public modalCtrl: ModalController) {
+  constructor(public platform: Platform, public statusBar: StatusBar, public splashScreen: SplashScreen, public modalCtrl: ModalController,private loadingCtrl:LoadingController,private network:Network) {
     this.initializeApp();
 
     // used for an example of ngFor and navigation
@@ -35,6 +37,34 @@ export class MyApp {
       // Here you can do any higher level native things you might need.
       this.statusBar.styleDefault();
       this.splashScreen.hide();
+
+      this.network.onDisconnect()
+        .subscribe(() => {
+          if (!this.loading){
+            this.loading = this.loadingCtrl.create({
+              content: 'Network Disconnected'
+            })
+            this.loading.present();
+          }
+        });
+      this.network.onConnect()
+        .subscribe(() => {
+          setTimeout(() => {
+            if(this.network.type === 'wifi'){
+              console.log('wifi connected');
+            }
+            if(this.loading){
+              this.loading.dismiss();
+              this.loading = null;
+            }
+          },3000)
+          // if (!this.loading) {
+          //   this.loading = this.loadingCtrl.create({
+          //     content: 'Network Connected'
+          //   })
+          //   this.loading.present();
+          // }
+        });
     });
   }
 

@@ -83,7 +83,15 @@ export class DishdetailPage {
           }
         },
         {
-
+          text: 'Share via Twitter',
+          handler: () => {
+            this.socialSharing.shareViaTwitter(
+              this.dish.name + '--' + this.dish.description,
+              this.BaseURL + this.dish.image, ''
+            ).then(() => console.log('Posted successfully to twitter'))
+              .catch(() => console.log('Failed to post to twitter'))
+              ;
+          }
         },
         {
           text: "Cancel",
